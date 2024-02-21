@@ -73,7 +73,7 @@ function playRound(playerSelection, computerSelection) {
         rock = 0
         scissors = 1
         paper = 2
-        
+
         rock - rock = 0 => draw
         rock - scissors = -1 => win
         rock - paper = -2 => lose
@@ -97,3 +97,15 @@ function playRound(playerSelection, computerSelection) {
 
     return result;
 }
+
+function playGame() {
+    const AMOUNT_OF_ROUNDS = 5;
+
+    for (let i = 0; i < AMOUNT_OF_ROUNDS; i++) {
+        const userInput = prompt("Choose your move:", "");
+
+        console.log(playRound(userInput, getComputerChoice()));
+    }
+}
+
+playGame();
