@@ -97,15 +97,3 @@ function playRound(playerSelection, computerSelection) {
 
     return result;
 }
-
-function playGame() {
-    const AMOUNT_OF_ROUNDS = 5;
-
-    for (let i = 0; i < AMOUNT_OF_ROUNDS; i++) {
-        const userInput = prompt("Choose your move:", "");
-
-        console.log(playRound(userInput, getComputerChoice()));
-    }
-}
-
-playGame();
