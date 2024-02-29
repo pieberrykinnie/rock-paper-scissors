@@ -106,7 +106,7 @@ function playRound(playerSelection, computerSelection) {
     } else {
         result = `You Lose! ${computerSelection} beats ${playerSelection}`;
         if (updateScore(computerScore) === "5") {
-            score.textContent += "Player won the game!";
+            score.textContent += "Computer won the game!";
             gameEnded = true;
         }
     }
