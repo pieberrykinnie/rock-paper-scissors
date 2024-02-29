@@ -10,8 +10,11 @@ const INVALID = -1;
 
 const buttons = document.querySelectorAll("button");
 const result = document.querySelector("#result");
+const score = document.querySelector("#score");
 const playerScore = document.querySelector("#playerScore");
 const computerScore = document.querySelector("#computerScore");
+
+var gameEnded = false;
 
 function getComputerChoice() {
     const computerChoiceCode = Math.floor(Math.random() * 3);
@@ -96,10 +99,16 @@ function playRound(playerSelection, computerSelection) {
         result = `You Draw! ${playerSelection} is the same as ${computerSelection}`;
     } else if (comparisonCode === -1 || comparisonCode === 2) {
         result = `You Win! ${playerSelection} beats ${computerSelection}`;
-        updateScore(playerScore);
+        if (updateScore(playerScore) === "5") {
+            score.textContent += "Player won the game!";
+            gameEnded = true;
+        }
     } else {
         result = `You Lose! ${computerSelection} beats ${playerSelection}`;
-        updateScore(computerScore);
+        if (updateScore(computerScore) === "5") {
+            score.textContent += "Player won the game!";
+            gameEnded = true;
+        }
     }
 
     return result;
@@ -107,10 +116,13 @@ function playRound(playerSelection, computerSelection) {
 
 for (let button of buttons) {
     button.addEventListener("click", (e) => {
-        result.textContent = playRound(e.target.textContent, getComputerChoice());
+        if (!gameEnded) {
+            result.textContent = playRound(e.target.textContent, getComputerChoice());
+        }
     })
 }
 
 function updateScore(scoreToUpdate) {
     scoreToUpdate.textContent = Number(scoreToUpdate.textContent) + 1;
+    return scoreToUpdate.textContent;
 }
