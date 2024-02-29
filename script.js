@@ -8,6 +8,11 @@ const PAPER = "Paper";
 
 const INVALID = -1;
 
+const buttons = document.querySelectorAll("button");
+const result = document.querySelector("#result");
+const playerScore = document.querySelector("#playerScore");
+const computerScore = document.querySelector("#computerScore");
+
 function getComputerChoice() {
     const computerChoiceCode = Math.floor(Math.random() * 3);
 
@@ -91,9 +96,21 @@ function playRound(playerSelection, computerSelection) {
         result = `You Draw! ${playerSelection} is the same as ${computerSelection}`;
     } else if (comparisonCode === -1 || comparisonCode === 2) {
         result = `You Win! ${playerSelection} beats ${computerSelection}`;
+        updateScore(playerScore);
     } else {
         result = `You Lose! ${computerSelection} beats ${playerSelection}`;
+        updateScore(computerScore);
     }
 
     return result;
+}
+
+for (let button of buttons) {
+    button.addEventListener("click", (e) => {
+        result.textContent = playRound(e.target.textContent, getComputerChoice());
+    })
+}
+
+function updateScore(scoreToUpdate) {
+    scoreToUpdate.textContent = Number(scoreToUpdate.textContent) + 1;
 }
